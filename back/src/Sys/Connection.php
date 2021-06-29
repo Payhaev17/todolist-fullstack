@@ -31,13 +31,13 @@ class Connection {
     return $this->query($query, $args)->rowCount();
   }
 
-  public function fetch(string $query, array $args = [])
+  public function fetch(string $query, array $args = []) :array
   {
     $stmt = $this->query($query, $args);
     return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
-  public function fetchAll(string $query, array $args = [])
+  public function fetchAll(string $query, array $args = []) :array
   {
     $stmt = $this->query($query, $args);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
