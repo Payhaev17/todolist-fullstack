@@ -13,7 +13,15 @@ export default {
   mutations: {},
   actions: {
     async signup(context, formData) {
-      const res = await fetch("");
+      const res = await fetch(process.env.VUE_APP_API_SERVER + "/Auth/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const user = await res.json();
     },
   },
 };

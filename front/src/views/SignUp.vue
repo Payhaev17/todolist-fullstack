@@ -21,8 +21,10 @@ export default {
   },
   methods: {
     signup(formData) {
-      console.log("Signup", formData);
-      this.$store.dispatch("signup", formData);
+      this.$store.dispatch("signup", {
+        login: formData.login,
+        password: formData.password,
+      });
     },
   },
 };
