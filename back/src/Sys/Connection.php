@@ -29,21 +29,21 @@ class Connection {
     return $this->query($query, $args)->rowCount();
   }
 
-  public function fetch(string $query, array $args = []) :array {
+  public function fetch(string $query, array $args = []) :mixed {
     $stmt = $this->query($query, $args);
     return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
-  public function fetchAll(string $query, array $args = []) :array {
+  public function fetchAll(string $query, array $args = []) :mixed {
     $stmt = $this->query($query, $args);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 
-  public function noPrepared(string $query) {
+  public function noPrepared(string $query) :mixed {
     return $this->db->query($query);
   }
 
-  public function quote(string $var) {
+  public function quote(string $var) :mixed {
     return $this->db->quote($var);
   }
 
@@ -51,11 +51,11 @@ class Connection {
     return $this->db->lastInsertId();
   }
 
-  public function offEmulate() {
+  public function offEmulate() :void {
     $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
   }
 
-  public function onEmulate() {
+  public function onEmulate() :void {
     $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, true);
   }
 }

@@ -10,7 +10,7 @@ class EnvReader {
     $this->env = parse_ini_file($_SERVER["DOCUMENT_ROOT"] ."/.env");
   }
 
-  public function getEnv() {
+  public function getEnv() :mixed {
     return $this->env;
   }
 }
