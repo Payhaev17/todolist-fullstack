@@ -1,5 +1,5 @@
 <template>
-  <form class="signform" @submit.prevent="$emit('signinEmit')">
+  <form class="sign-form" @submit.prevent="$emit('signinEmit')">
     <input class="input" type="text" placeholder="Login" required />
     <input class="input" type="text" placeholder="Password" required />
     <div class="w100p text-right">

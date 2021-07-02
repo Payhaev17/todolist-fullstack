@@ -1,5 +1,5 @@
 <template>
-  <form class="signform" @submit.prevent="signup">
+  <form class="sign-form" @submit.prevent="signup">
     <input
       class="input"
       :class="{ 'input-invalid': !validLogin }"

@@ -1,11 +1,11 @@
 <template>
-  <main class="signmain">
-    <article class="signarticle">
-      <section class="signsection">
-        <h3 class="signarticle__title">SignUp</h3>
+  <main class="sign-main">
+    <article class="sign-article">
+      <section class="sign-section">
+        <h3 class="sign-article__title">SignUp</h3>
         <SignUpForm @signupEmit="signup" />
       </section>
-      <section class="redirectsection">
+      <section class="redirect-section">
         <router-link to="/signin">SignIn</router-link>
       </section>
     </article>

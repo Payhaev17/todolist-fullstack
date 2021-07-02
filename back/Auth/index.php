@@ -21,7 +21,8 @@ $Auth = new App\Auth(
   new App\Sys\Connection($envConfig["DB_HOST"], $envConfig["DB_NAME"], $envConfig["DB_USERNAME"], $envConfig["DB_PASSWORD"]),
   new App\Sys\Validator(),
   new App\Sys\RequestBodyReader(),
-  new App\Sys\Messenger()
+  new App\Sys\Messenger(),
+  new App\Sys\RandomStr()
 );
 
 $Auth->auth();

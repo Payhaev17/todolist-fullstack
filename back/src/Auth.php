@@ -8,12 +8,18 @@ class Auth {
   private \App\Sys\RequestBodyReader $RequestBodyReader;
   private \App\Sys\Messenger $Messenger;
 
-  public function __construct(\App\Sys\Connection $Connection, \App\Sys\Validator $Validator, \App\Sys\RequestBodyReader $RequestBodyReader, \App\Sys\Messenger $Messenger)
+  public function __construct(
+    \App\Sys\Connection $Connection, 
+    \App\Sys\Validator $Validator, 
+    \App\Sys\RequestBodyReader $RequestBodyReader, 
+    \App\Sys\Messenger $Messenger,
+    \App\Sys\RandomStr $RandomStr)
   {
     $this->Connection = $Connection;
     $this->Validator = $Validator;
     $this->RequestBodyReader = $RequestBodyReader;
     $this->Messenger = $Messenger;
+    $this->RandomStr = $RandomStr;
   }
 
   public function auth() :void {
@@ -50,14 +56,18 @@ class Auth {
     }
 
     # Signup
-    $this->Connection->query("INSERT INTO users (login, password, session_hash, date) VALUES (?, ?, ?, ?)", array($login, password_hash($password, PASSWORD_DEFAULT), time()));
+    $sessionHash = $this->RandomStr->sessionHash();
+
+    // $this->Connection->query("INSERT INTO users (login, password, session_hash, date) VALUES (?, ?, ?, ?)", array(
+    //   $login, password_hash($password, PASSWORD_DEFAULT), $sessionHash, time()
+    // ));
     
     $userId = $this->Connection->lastId();
 
     $this->Messenger->sendResponse(201, [
       "auth" => true,
       "id" => $userId,
-      "hash" => "1421gsfqr51aefa"
+      "hash" => $sessionHash
     ]);
   }
 

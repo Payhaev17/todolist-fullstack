@@ -9,16 +9,16 @@
   font-family: "Courier New", Courier, monospace;
 }
 
-.signsection {
+.sign-section {
   width: 100%;
 }
-.redirectsection {
+.redirect-section {
   width: 100%;
   margin-top: 1em;
   text-align: center;
 }
 
-.signform {
+.sign-form {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -45,7 +45,7 @@
   box-shadow: 0px 3px 5px var(--red1);
 }
 
-.signmain {
+.sign-main {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -53,7 +53,7 @@
   align-items: center;
 }
 
-.signarticle {
+.sign-article {
   width: 50%;
   height: 50%;
   background-color: white;
@@ -62,6 +62,6 @@
   align-items: center;
   flex-direction: column;
 }
-.signarticle__title {
+.sign-article__title {
   margin-bottom: 1em;
 }
