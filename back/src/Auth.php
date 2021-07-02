@@ -16,7 +16,7 @@ class Auth {
     $this->Messenger = $Messenger;
   }
 
-  public function auth() {
+  public function auth() :void {
     switch($_SERVER["REQUEST_METHOD"]) {
       case "POST":
         $this->signUp();
@@ -27,7 +27,7 @@ class Auth {
     }
   }
 
-  public function signUp() {
+  public function signUp() :void {
     $body = $this->RequestBodyReader->getBody();
 
     $login = trim(htmlspecialchars( (isset($body["login"]) ? $body["login"] : "") ));
@@ -50,14 +50,18 @@ class Auth {
     }
 
     # Signup
+    $this->Connection->query("INSERT INTO users (login, password, session_hash, date) VALUES (?, ?, ?, ?)", array($login, password_hash($password, PASSWORD_DEFAULT), time()));
+    
+    $userId = $this->Connection->lastId();
+
     $this->Messenger->sendResponse(201, [
       "auth" => true,
-      "id" => 1,
+      "id" => $userId,
       "hash" => "1421gsfqr51aefa"
     ]);
   }
 
-  public function signIn() {
+  public function signIn() :void {
     return;
   }
 }

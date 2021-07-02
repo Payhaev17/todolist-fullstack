@@ -14,8 +14,7 @@ class Connection {
     }
   }
 
-  public function query(string $query, array $args = []) :mixed
-  {
+  public function query(string $query, array $args = []) :mixed {
     try {
       $statement = $this->db->prepare($query);
       $statement->execute($args);
@@ -26,45 +25,37 @@ class Connection {
     return $statement;
   }
 
-  public function rows(string $query, array $args = []) :mixed
-  {
+  public function rows(string $query, array $args = []) :mixed {
     return $this->query($query, $args)->rowCount();
   }
 
-  public function fetch(string $query, array $args = []) :array
-  {
+  public function fetch(string $query, array $args = []) :array {
     $stmt = $this->query($query, $args);
     return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
-  public function fetchAll(string $query, array $args = []) :array
-  {
+  public function fetchAll(string $query, array $args = []) :array {
     $stmt = $this->query($query, $args);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 
-  public function noPrepared(string $query)
-  {
+  public function noPrepared(string $query) {
     return $this->db->query($query);
   }
 
-  public function quote(string $var)
-  {
+  public function quote(string $var) {
     return $this->db->quote($var);
   }
 
-  public function lastId() :mixed
-  {
+  public function lastId() :mixed {
     return $this->db->lastInsertId();
   }
 
-  public function offEmulate()
-  {
+  public function offEmulate() {
     $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
   }
 
-  public function onEmulate()
-  {
+  public function onEmulate() {
     $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, true);
   }
 }
