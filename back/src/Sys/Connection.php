@@ -8,7 +8,7 @@ class Connection {
   public function __construct(string $host, string $dbname, string $username, string $password)
   {
     try {
-      $this->db = new \PDO("mysql:host=$host;dbname=$dbname", $username, $password, [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
+      $this->db = new \PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     } catch (\PDOException $e) {
       exit(http_response_code(500));
     }
@@ -18,15 +18,17 @@ class Connection {
   {
     try {
       $statement = $this->db->prepare($query);
-      return $statement->execute($args);
+      $statement->execute($args);
     } catch (\PDOException $e) {
       throw $e;
     }
+
+    return $statement;
   }
 
   public function rows(string $query, array $args = []) :mixed
   {
-    return $this->query($query, $args)->rowsCount();
+    return $this->query($query, $args)->rowCount();
   }
 
   public function fetch(string $query, array $args = []) :array

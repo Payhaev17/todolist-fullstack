@@ -33,9 +33,7 @@ class Auth {
     $login = trim(htmlspecialchars( (isset($body["login"]) ? $body["login"] : "") ));
     $password = trim(htmlspecialchars( (isset($body["password"]) ? $body["password"] : "") ));
 
-    $loginIsOccupy = $this->Connection->query("SELECT * FROM users WHERE id = 1");
-
-    print_r($loginIsOccupy);
+    $loginIsOccupy = $this->Connection->rows("SELECT id FROM users WHERE login = ?", array($login));
 
     # Login ocuppied
     if ($loginIsOccupy) {
