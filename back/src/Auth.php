@@ -33,11 +33,30 @@ class Auth {
     $login = trim(htmlspecialchars( (isset($body["login"]) ? $body["login"] : "") ));
     $password = trim(htmlspecialchars( (isset($body["password"]) ? $body["password"] : "") ));
 
-    if ($this->Validator->loginValid($login) && $this->Validator->passwordValid($password)) {
-      $this->Messenger->sendResponse(201, "Signed!");
-    } else {
-      $this->Messenger->sendResponse(400, "Sign error...");
+    $loginIsOccupy = $this->Connection->query("SELECT * FROM users WHERE id = 1");
+
+    print_r($loginIsOccupy);
+
+    # Login ocuppied
+    if ($loginIsOccupy) {
+      $this->Messenger->sendResponse(400, [
+        "error" => "Логин занят!"
+      ]);
     }
+
+    # Invalid data
+    if (!($this->Validator->loginValid($login) && $this->Validator->passwordValid($password))) {
+      $this->Messenger->sendResponse(400, [
+        "error" => "Введите корректные данные!"
+      ]);
+    }
+
+    # Signup
+    $this->Messenger->sendResponse(201, [
+      "auth" => true,
+      "id" => 1,
+      "hash" => "1421gsfqr51aefa"
+    ]);
   }
 
   public function signIn() {

@@ -13,6 +13,6 @@ class Messenger {
   }
 
   private function sendBody(mixed $body) {
-    exit($body);
+    exit(json_encode($body));
   }
 }

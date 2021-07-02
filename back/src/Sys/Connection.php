@@ -8,9 +8,9 @@ class Connection {
   public function __construct(string $host, string $dbname, string $username, string $password)
   {
     try {
-      $this->db = new \PDO("mysql:host=$host;dbname=$dbname", "$username", "$password");
-    } catch (\Exception $e) {
-      http_response_code(500);
+      $this->db = new \PDO("mysql:host=$host;dbname=$dbname", $username, $password, [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
+    } catch (\PDOException $e) {
+      exit(http_response_code(500));
     }
   }
 
@@ -18,17 +18,15 @@ class Connection {
   {
     try {
       $statement = $this->db->prepare($query);
-      $statement->execute($args);
-    } catch (\PDOException $e)
-    {
+      return $statement->execute($args);
+    } catch (\PDOException $e) {
       throw $e;
     }
-    return $statement;
   }
 
-  public function rows(string $query, array $args = []) :int
+  public function rows(string $query, array $args = []) :mixed
   {
-    return $this->query($query, $args)->rowCount();
+    return $this->query($query, $args)->rowsCount();
   }
 
   public function fetch(string $query, array $args = []) :array
@@ -45,7 +43,7 @@ class Connection {
 
   public function noPrepared(string $query)
   {
-    return $this->db->query( $query );
+    return $this->db->query($query);
   }
 
   public function quote(string $var)
@@ -53,7 +51,7 @@ class Connection {
     return $this->db->quote($var);
   }
 
-  public function last() :int
+  public function lastId() :mixed
   {
     return $this->db->lastInsertId();
   }
@@ -63,8 +61,8 @@ class Connection {
     $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
   }
 
-  public function onEmulate(string $param)
+  public function onEmulate()
   {
-    $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $param);
+    $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, true);
   }
 }
