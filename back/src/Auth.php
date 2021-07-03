@@ -23,11 +23,11 @@ class Auth {
   }
 
   public function auth() :void {
-    switch($_SERVER["REQUEST_METHOD"]) {
-      case "POST":
+    switch($_GET["t"]) {
+      case "signup":
         $this->signUp();
         break;
-      case "GET":
+      case "signin":
         $this->signIn();
         break;
     }

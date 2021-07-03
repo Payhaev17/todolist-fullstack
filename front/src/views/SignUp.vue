@@ -36,7 +36,7 @@ export default {
   }),
   methods: {
     async signup(formData) {
-      const res = await this.$store.dispatch("signup", {
+      const res = await this.$store.dispatch("auth", "signup", {
         login: formData.login,
         password: formData.password,
       });
