@@ -43,14 +43,14 @@ class Auth {
 
     # Login ocuppied
     if ($loginIsOccupy) {
-      $this->Messenger->sendResponse(400, [
+      $this->Messenger->sendResponse(401, [
         "error" => "Логин занят!"
       ]);
     }
 
     # Invalid data
     if (!($this->Validator->loginValid($login) && $this->Validator->passwordValid($password))) {
-      $this->Messenger->sendResponse(400, [
+      $this->Messenger->sendResponse(401, [
         "error" => "Введите корректные данные!"
       ]);
     }

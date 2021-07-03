@@ -21,7 +21,9 @@ export default {
         body: JSON.stringify(formData),
       });
 
-      const user = await res.json();
+      const data = await res.json();
+
+      return data.error || true;
     },
   },
 };

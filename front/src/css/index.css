@@ -8,6 +8,9 @@
   margin: 0 auto;
   font-family: "Courier New", Courier, monospace;
 }
+a {
+  color: #212121;
+}
 
 .sign-section {
   width: 100%;

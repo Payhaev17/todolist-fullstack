@@ -20,11 +20,13 @@ export default {
     SignUpForm,
   },
   methods: {
-    signup(formData) {
-      this.$store.dispatch("signup", {
+    async signup(formData) {
+      const res = await this.$store.dispatch("signup", {
         login: formData.login,
         password: formData.password,
       });
+
+      console.log(res);
     },
   },
 };
