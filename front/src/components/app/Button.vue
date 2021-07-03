@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('buttonClickEmit')">{{ text }}</button>
+  <button class="button" @click="$emit('buttonClickEmit')">{{ text }}</button>
 </template>
 
 <script>
@@ -10,8 +10,8 @@ export default {
 };
 </script>
 
-<style scoped>
-button {
+<style>
+.button {
   display: inline-block;
   padding: 5px 10px;
   box-shadow: 0px 2px 5px grey;
@@ -20,12 +20,12 @@ button {
   border-radius: 5px;
   background: none;
   cursor: pointer;
-  transition: 0.1s linear;
+  transition: 0.1s;
 }
-button:active {
+.button:active {
   box-shadow: 0px 0px 0px;
 }
-button:disabled {
+.button:disabled {
   opacity: 0.5;
 }
 </style>
