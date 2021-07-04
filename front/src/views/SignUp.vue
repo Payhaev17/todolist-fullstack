@@ -48,7 +48,7 @@ export default {
         this.popup.text = res.error;
         this.popup.active = true;
       } else {
-        // this.$router.push("/");
+        this.$router.push("/");
       }
     },
     closePopup() {
