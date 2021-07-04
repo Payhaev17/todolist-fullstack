@@ -76,25 +76,25 @@ class Auth {
 
     $login = isset($body["login"]) ? $body["login"] : "";
     $password = isset($body["password"]) ? $body["password"] : "";
-
+    
     $user = $this->Connection->fetch("SELECT id, password FROM users WHERE login = ?", array($login));
 
-    if ($user && password_verify($password, $user["password"])) {
-      $sessionHash = $this->RandomStr->sessionHash();
-      
-      $this->Connection->query("UPDATE users SET session_hash = ? WHERE id = ?", array(
-        $sessionHash, $user["id"]
-      ));
-
-      $this->Messenger->sendResponse(200, [
-        "auth" => true,
-        "id" => $user["id"],
-        "hash" => $sessionHash
-      ]);
-    } else {
+    if (!$user || !password_verify($password, $user["password"])) {
       $this->Messenger->sendResponse(401, [
         "error" => "Логин или пароль введены не верно!"
       ]);
     }
+
+    $sessionHash = $this->RandomStr->sessionHash();
+      
+    $this->Connection->query("UPDATE users SET session_hash = ? WHERE id = ?", array(
+      $sessionHash, $user["id"]
+    ));
+
+    $this->Messenger->sendResponse(200, [
+      "auth" => true,
+      "id" => $user["id"],
+      "hash" => $sessionHash
+    ]);
   }
 }

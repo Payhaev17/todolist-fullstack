@@ -22,9 +22,6 @@ export default {
         process.env.VUE_APP_API_SERVER + "/Auth/?t=" + args.type,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
           body: JSON.stringify(args.formData),
         }
       );
