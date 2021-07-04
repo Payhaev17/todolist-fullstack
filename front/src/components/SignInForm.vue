@@ -39,6 +39,9 @@ export default {
   methods: {
     signin() {
       if (this.allValid) {
+        this.form.login = "";
+        this.form.password = "";
+
         this.$emit("signinEmit", this.form);
       }
     },

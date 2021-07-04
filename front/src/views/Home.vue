@@ -21,7 +21,10 @@
 export default {
   name: "home",
   methods: {
-    exit() {},
+    exit() {
+      this.$store.dispatch("exit");
+      this.$router.push("/signin");
+    },
   },
 };
 </script>
