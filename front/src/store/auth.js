@@ -17,15 +17,15 @@ export default {
     },
   },
   actions: {
-    async auth(context, type = "signin", formData) {
+    async auth(context, args) {
       const res = await fetch(
-        process.env.VUE_APP_API_SERVER + "/Auth/?t=" + type,
+        process.env.VUE_APP_API_SERVER + "/Auth/?t=" + args.type,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(args.formData),
         }
       );
 

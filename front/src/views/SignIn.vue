@@ -35,10 +35,13 @@ export default {
     },
   }),
   methods: {
-    async signin() {
-      const res = await this.$store.dispatch("auth", "signin", {
-        login: formData.login,
-        password: formData.password,
+    async signin(formData) {
+      const res = await this.$store.dispatch("auth", {
+        type: "signin",
+        formData: {
+          login: formData.login,
+          password: formData.password,
+        },
       });
 
       if (res.error) {

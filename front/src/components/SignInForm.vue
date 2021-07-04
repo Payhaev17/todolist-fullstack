@@ -1,5 +1,5 @@
 <template>
-  <form class="sign-form" @submit.prevent="$emit('signinEmit')">
+  <form class="sign-form" @submit.prevent="signin">
     <input
       class="input"
       :class="{ 'input-invalid': !validLogin }"
@@ -36,6 +36,13 @@ export default {
       password: "",
     },
   }),
+  methods: {
+    signin() {
+      if (this.allValid) {
+        this.$emit("signinEmit", this.form);
+      }
+    },
+  },
   computed: {
     validLogin() {
       return this.loginValid(this.form.login);
