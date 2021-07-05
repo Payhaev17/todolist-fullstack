@@ -14,7 +14,7 @@ export default {
 .button {
   display: inline-block;
   padding: 5px 10px;
-  box-shadow: 0px 2px 5px grey;
+  box-shadow: 0px 2px 5px var(--grey1);
   outline: none;
   border: none;
   border-radius: 5px;

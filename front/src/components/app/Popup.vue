@@ -51,8 +51,8 @@ export default {
   position: relative;
   border-radius: 5px;
   padding: 5em;
-  background-color: white;
-  box-shadow: 0px 3px 6px grey;
+  background-color: var(--white1);
+  box-shadow: 0px 3px 6px var(--grey1);
   text-align: center;
 }
 .popup__text {
