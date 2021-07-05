@@ -6,7 +6,7 @@
       <span class="main-header__name">Mota</span>
       <div class="main-header__profile-down">
         <ul>
-          <li @click="exit">
+          <li @click="$emit('exitEmit')">
             <i class="tiny material-icons">exit_to_app</i> <span>Exit</span>
           </li>
         </ul>
@@ -15,16 +15,17 @@
   </header>
 </template>
 
-<style>
+<style scoped>
 .main-header {
   width: 100%;
   height: 3em;
   color: var(--white1);
   background-color: var(--green1);
-  box-shadow: 0px 3px 4px var(--grey1);
+  box-shadow: 0px 2px 3px var(--grey1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 3px;
 }
 .main-header__logo {
   margin-left: 1em;

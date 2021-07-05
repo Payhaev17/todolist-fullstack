@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .button {
   display: inline-block;
   padding: 5px 10px;
@@ -18,7 +18,7 @@ export default {
   outline: none;
   border: none;
   border-radius: 5px;
-  background: none;
+  background-color: var(--white1);
   cursor: pointer;
   transition: 0.1s;
 }
