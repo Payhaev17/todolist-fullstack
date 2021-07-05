@@ -25,7 +25,4 @@ export default {
 .button:active {
   box-shadow: 0px 0px 0px;
 }
-.button:disabled {
-  opacity: 0.5;
-}
 </style>

@@ -47,11 +47,11 @@ export default {
   methods: {
     signup() {
       if (this.allValid) {
+        this.$emit("signupEmit", { ...this.form });
+
         this.form.login = "";
         this.form.password = "";
         this.form.password2 = "";
-
-        this.$emit("signupEmit", this.form);
       }
     },
   },

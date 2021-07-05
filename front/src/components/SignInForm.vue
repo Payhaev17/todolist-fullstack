@@ -39,10 +39,10 @@ export default {
   methods: {
     signin() {
       if (this.allValid) {
+        this.$emit("signinEmit", { ...this.form });
+
         this.form.login = "";
         this.form.password = "";
-
-        this.$emit("signinEmit", this.form);
       }
     },
   },
