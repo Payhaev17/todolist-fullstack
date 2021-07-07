@@ -1,12 +1,12 @@
 <template>
   <section class="pagination">
-    <Button :text="'Назад'" />
+    <Button :text="'Prev'" />
     <a class="pagination__a">1</a>
     <a class="pagination__a">1</a>
     <a class="pagination__curr">1</a>
     <a class="pagination__a">1</a>
     <a class="pagination__a">1</a>
-    <Button :text="'Вперед'" />
+    <Button :text="'Next'" />
   </section>
 </template>
 

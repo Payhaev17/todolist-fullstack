@@ -6,8 +6,8 @@
         {{ todo.text }}
       </span>
       <div class="todo-actions">
-        <Button class="button" :text="'Выполнено'" />
-        <Button class="button" :text="'Удалить'" />
+        <Button class="button" :text="'Success'" />
+        <Button class="button" :text="'Delete'" />
       </div>
     </div>
   </div>
