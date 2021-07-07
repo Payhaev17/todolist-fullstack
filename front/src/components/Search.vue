@@ -1,6 +1,6 @@
 <template>
   <section class="search-section">
-    <input class="input input-simple" type="text" placeholder="Search" />
+    <input class="input input-simple" type="text" placeholder="Todo" />
     <Button class="button" :text="'Search'" />
   </section>
 </template>

@@ -17,7 +17,7 @@ export default {
   box-shadow: 0px 2px 5px var(--grey1);
   outline: none;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: var(--white1);
   cursor: pointer;
   transition: 0.1s;

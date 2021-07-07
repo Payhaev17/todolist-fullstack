@@ -7,6 +7,7 @@ class Auth {
   private \App\Sys\Validator $Validator;
   private \App\Sys\RequestBodyReader $RequestBodyReader;
   private \App\Sys\Messenger $Messenger;
+  private \App\Sys\RandomStr $RandomStr;
 
   public function __construct(
     \App\Sys\Connection $Connection, 

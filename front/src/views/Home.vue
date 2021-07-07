@@ -4,10 +4,12 @@
     <main class="home-main">
       <article class="todos-article">
         <Search />
-        <Todos :todos="todos" class="todos" />
+        <Todos class="todos" :todos="todos" />
         <Pagination class="pagination" />
       </article>
-      <aside class="todos-info-aside"></aside>
+      <aside class="todos-info">
+        <h3 class="todos-info__title">Info</h3>
+      </aside>
     </main>
   </div>
 </template>
@@ -36,6 +38,9 @@ export default {
       { id: 5, title: "Title", text: "Helo wrodld awda dla aa" },
     ],
   }),
+  async mounted() {
+    await this.$store.dispatch("fetchTodos");
+  },
   methods: {
     exit() {
       this.$store.dispatch("exit");
@@ -57,11 +62,15 @@ export default {
   box-shadow: 0px 2px 3px var(--grey1);
   border-radius: 3px;
 }
-.todos-info-aside {
+.todos-info {
   width: 30%;
+  padding: 1em;
   height: 25vh;
   box-shadow: 0px 2px 3px var(--grey1);
   border-radius: 3px;
+}
+.todos-info__title {
+  text-align: center;
 }
 .todos {
   margin-top: 1em;
