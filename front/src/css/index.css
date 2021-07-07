@@ -1,3 +1,6 @@
+@import "@/css/vars.css";
+@import "@/css/helpers.css";
+
 * {
   margin: 0;
   padding: 0;
