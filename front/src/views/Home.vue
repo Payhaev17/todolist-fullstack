@@ -5,6 +5,7 @@
       <article class="todos-article">
         <Search />
         <Todos :todos="todos" class="todos" />
+        <Pagination class="pagination" />
       </article>
       <aside class="todos-info-aside"></aside>
     </main>
@@ -16,6 +17,7 @@ import MainHeader from "@/components/app/MainHeader.vue";
 
 import Search from "@/components/Search.vue";
 import Todos from "@/components/Todos.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
   name: "home",
@@ -23,6 +25,7 @@ export default {
     MainHeader,
     Search,
     Todos,
+    Pagination,
   },
   data: () => ({
     todos: [
@@ -61,6 +64,9 @@ export default {
   border-radius: 3px;
 }
 .todos {
+  margin-top: 1em;
+}
+.pagination {
   margin-top: 1em;
 }
 </style>
