@@ -13,7 +13,7 @@ export default {
 <style scoped>
 .button {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 0.4em 0.8em;
   box-shadow: 0px 2px 5px var(--grey1);
   outline: none;
   border: none;

@@ -1,9 +1,10 @@
 import { createApp } from "vue";
-import App from "./App.vue";
 
-import "./registerServiceWorker";
-import router from "./router";
-import store from "./store";
+import "@/registerServiceWorker";
+
+import App from "@/App.vue";
+import router from "@/router";
+import store from "@/store";
 
 import "@/css/index.css";
 import "material-design-icons/iconfont/material-icons.css";

@@ -1,12 +1,26 @@
 <template>
   <section class="pagination">
-    <Button :text="'Prev'" />
-    <a class="pagination__a">1</a>
-    <a class="pagination__a">1</a>
-    <a class="pagination__curr">1</a>
-    <a class="pagination__a">1</a>
-    <a class="pagination__a">1</a>
-    <Button :text="'Next'" />
+    <router-link
+      :to="'/?page=' + prevPage"
+      @click="$emit('changePageEmit', prevPage)"
+    >
+      Prev
+    </router-link>
+    <router-link
+      v-for="page in pages"
+      :key="page"
+      :class="{ pagination__curr: currPage === page }"
+      :to="'/?page=' + page"
+      @click="$emit('changePageEmit', page)"
+    >
+      {{ page }}
+    </router-link>
+    <router-link
+      :to="'/?page=' + nextPage"
+      @click="$emit('changePageEmit', nextPage)"
+    >
+      Next
+    </router-link>
   </section>
 </template>
 
@@ -14,8 +28,21 @@
 import Button from "@/components/app/Button.vue";
 
 export default {
+  props: {
+    currPage: Number,
+    maxPage: Number,
+    pages: Array,
+  },
   components: {
     Button,
+  },
+  computed: {
+    prevPage() {
+      return this.currPage <= 1 ? 1 : this.currPage - 1;
+    },
+    nextPage() {
+      return this.currPage >= this.maxPage ? this.currPage : this.currPage + 1;
+    },
   },
 };
 </script>
@@ -27,9 +54,11 @@ export default {
   justify-content: space-between;
 }
 .pagination a {
+  padding: 0.3em 0.5em;
+  text-decoration: none;
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 0 0.5em;
   border-radius: 3px;
   box-shadow: 0px 2px 5px var(--grey1);
   cursor: pointer;

@@ -43,10 +43,10 @@ class UserTodos {
     if (!$this->User->isAuth()) {
       $this->Messenger->sendResponse(401, "Unauthorized");
     }
-
-    $userTodos = $this->Connection->fetchAll("SELECT * FROM todos WHERE user_id = ?", array($this->User->getId()));
   
-    $this->Messenger->sendResponse(200, $userTodos);
+    $this->Messenger->sendResponse(200, 
+      $this->Connection->fetchAll("SELECT * FROM todos WHERE user_id = ?", array($this->User->getId()))
+    );
   }
 
   private function addTodo() {

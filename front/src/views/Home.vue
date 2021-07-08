@@ -4,8 +4,14 @@
     <main class="home-main">
       <article class="todos-article">
         <Search />
-        <Todos class="todos" :todos="todos" />
-        <Pagination class="pagination" />
+        <Todos class="todos" :todos="paginatedData" />
+        <Pagination
+          class="pagination"
+          :currPage="page"
+          :maxPage="maxPage"
+          :pages="paginationPages"
+          @changePageEmit="changePage"
+        />
       </article>
       <aside class="todos-info">
         <h3 class="todos-info__title">Info</h3>
@@ -21,6 +27,8 @@ import Search from "@/components/Search.vue";
 import Todos from "@/components/Todos.vue";
 import Pagination from "@/components/Pagination.vue";
 
+import PaginationMixin from "@/mixins/pagination.mixin.js";
+
 export default {
   name: "home",
   components: {
@@ -29,17 +37,15 @@ export default {
     Todos,
     Pagination,
   },
+  mixins: [PaginationMixin],
   data: () => ({
-    todos: [
-      { id: 1, title: "Title", text: "Helo wrodld awda dla aa" },
-      { id: 2, title: "Title", text: "Helo wrodld awda dla aa" },
-      { id: 3, title: "Title", text: "Helo wrodld awda dla aa" },
-      { id: 4, title: "Title", text: "Helo wrodld awda dla aa" },
-      { id: 5, title: "Title", text: "Helo wrodld awda dla aa" },
-    ],
+    dataForPagination: [],
   }),
+  created() {
+    this.page = Number(this.$route.query.page) || 1;
+  },
   async mounted() {
-    await this.$store.dispatch("fetchTodos");
+    this.dataForPagination = await this.$store.dispatch("fetchTodos");
   },
   methods: {
     exit() {
@@ -65,7 +71,7 @@ export default {
 .todos-info {
   width: 30%;
   padding: 1em;
-  height: 25vh;
+  max-height: 200px;
   box-shadow: 0px 2px 3px var(--grey1);
   border-radius: 3px;
 }

@@ -1,6 +1,9 @@
 <template>
   <section class="todos-section">
-    <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+    <div v-if="todos.length" class="todos-list">
+      <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+    </div>
+    <h4 class="todos-empty" v-else>Пусто</h4>
   </section>
 </template>
 
@@ -16,3 +19,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.todos-section {
+  height: 380px;
+}
+.todos-empty {
+  text-align: center;
+}
+</style>

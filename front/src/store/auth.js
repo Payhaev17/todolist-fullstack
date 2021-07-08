@@ -29,7 +29,7 @@ export default {
     },
     async auth(context, args) {
       const res = await fetch(
-        process.env.VUE_APP_API_SERVER + "/Auth/?t=" + args.type,
+        process.env.VUE_APP_API_SERVER + "/api/Auth/?t=" + args.type,
         {
           method: "POST",
           body: JSON.stringify(args.formData),
