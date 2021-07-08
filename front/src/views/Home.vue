@@ -3,7 +3,7 @@
     <MainHeader @exitEmit="exit" />
     <main class="home-main">
       <article class="todos-article">
-        <Search />
+        <Search @searchEmit="changeSearchText" />
         <Todos class="todos" :todos="paginatedData" />
         <Pagination
           class="pagination"
@@ -39,18 +39,35 @@ export default {
   },
   mixins: [PaginationMixin],
   data: () => ({
-    dataForPagination: [],
+    searchText: "",
+    todos: [],
   }),
   created() {
     this.page = Number(this.$route.query.page) || 1;
   },
   async mounted() {
-    this.dataForPagination = await this.$store.dispatch("fetchTodos");
+    this.todos = await this.$store.dispatch("fetchTodos");
   },
   methods: {
     exit() {
       this.$store.dispatch("exit");
       this.$router.push("/signin");
+    },
+    changeSearchText(text) {
+      this.searchText = text;
+    },
+  },
+  computed: {
+    dataForPagination() {
+      return this.todos.filter((todo) => {
+        const keys = Object.keys(todo);
+
+        for (const key of keys) {
+          if (typeof todo[key] === "string") {
+            if (todo[key].includes(this.searchText)) return true;
+          }
+        }
+      });
     },
   },
 };

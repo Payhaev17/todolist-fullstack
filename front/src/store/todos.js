@@ -28,16 +28,16 @@ export default {
 
       const todos = [
         { id: 1, title: "Title", text: "text task a", succ: 0 },
-        { id: 2, title: "Title", text: "text task a", succ: 0 },
-        { id: 3, title: "Title", text: "text task a", succ: 0 },
-        { id: 4, title: "Title", text: "text task a", succ: 0 },
-        { id: 5, title: "Title", text: "text task a", succ: 0 },
-        { id: 6, title: "Title", text: "text task a", succ: 0 },
-        { id: 7, title: "Title", text: "text task a", succ: 0 },
-        { id: 8, title: "Title", text: "text task a", succ: 0 },
-        { id: 9, title: "Title", text: "text task a", succ: 0 },
-        { id: 10, title: "Title", text: "text task a", succ: 0 },
-        { id: 11, title: "Title", text: "text task a", succ: 0 },
+        { id: 2, title: "lita", text: "text task a", succ: 0 },
+        { id: 3, title: "Name", text: "text task a", succ: 0 },
+        { id: 4, title: "Mota", text: "text task a", succ: 0 },
+        { id: 5, title: "Gag", text: "text task a", succ: 0 },
+        { id: 6, title: "XXX", text: "text task a", succ: 0 },
+        { id: 7, title: "Face", text: "text task a", succ: 0 },
+        { id: 8, title: "Она была в нем", text: "text task a", succ: 0 },
+        { id: 9, title: "jf", text: "text task a", succ: 0 },
+        { id: 10, title: "Face", text: "text task a", succ: 0 },
+        { id: 11, title: "WWE", text: "text task a", succ: 0 },
       ];
 
       if (typeof todos === "object") {

@@ -19,11 +19,15 @@ export default {
       return this.dataForPagination.slice(s, e);
     },
     paginationPages() {
-      const pages = [];
       const maxPage = this.maxPage;
+      const pages = [];
 
       for (let i = 0; i < maxPage; ++i) {
-        pages.push(i + 1);
+        const page = i + 1;
+
+        if (Math.abs(this.page - page) <= 2) {
+          pages.push(page);
+        }
       }
 
       return pages;
