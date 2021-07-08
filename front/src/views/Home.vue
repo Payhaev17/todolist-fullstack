@@ -15,6 +15,20 @@
       </article>
       <aside class="todos-info">
         <h3 class="todos-info__title">Info</h3>
+        <div class="todos-info__item">
+          <div class="todos-info__name">
+            <i class="material-icons">format_list_bulleted</i>
+            Total tasks:
+          </div>
+          <span class="todos-info__value">1</span>
+        </div>
+        <div class="todos-info__item">
+          <div class="todos-info__name">
+            <i class="material-icons">check</i>
+            Completed tasks:
+          </div>
+          <span class="todos-info__value">0</span>
+        </div>
       </aside>
     </main>
   </div>
@@ -94,6 +108,20 @@ export default {
 }
 .todos-info__title {
   text-align: center;
+}
+.todos-info__item {
+  width: 100%;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.todos-info__name {
+  display: flex;
+  align-items: center;
+}
+.todos-info__value {
+  margin-left: 1em;
 }
 .todos {
   margin-top: 1em;

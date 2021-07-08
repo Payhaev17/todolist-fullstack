@@ -4,7 +4,7 @@
       :to="'/?page=' + prevPage"
       @click="$emit('changePageEmit', prevPage)"
     >
-      Prev
+      <i class="small material-icons">chevron_left</i>
     </router-link>
     <router-link
       v-for="page in pages"
@@ -19,7 +19,7 @@
       :to="'/?page=' + nextPage"
       @click="$emit('changePageEmit', nextPage)"
     >
-      Next
+      <i class="small material-icons">chevron_right</i>
     </router-link>
   </section>
 </template>
@@ -54,7 +54,7 @@ export default {
   justify-content: space-between;
 }
 .pagination a {
-  padding: 0.3em 0.5em;
+  padding: 0.1em 0.5em;
   text-decoration: none;
   display: flex;
   justify-content: center;
