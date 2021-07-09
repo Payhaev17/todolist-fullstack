@@ -27,7 +27,7 @@
             <i class="material-icons">check</i>
             Completed tasks:
           </div>
-          <span class="todos-info__value">0</span>
+          <span class="todos-info__value">41</span>
         </div>
       </aside>
     </main>
@@ -110,18 +110,21 @@ export default {
   text-align: center;
 }
 .todos-info__item {
-  width: 100%;
   margin-top: 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .todos-info__name {
+  width: 100%;
   display: flex;
   align-items: center;
 }
 .todos-info__value {
-  margin-left: 1em;
+  width: 4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
 }
 .todos {
   margin-top: 1em;
