@@ -1,12 +1,14 @@
 <template>
-  <div class="todo-item">
-    <h3 class="todo-title">{{ todo.title }}</h3>
+  <div class="todo-item" :class="{ 'todo-item_completed': todo.complete }">
+    <h3 class="todo-title" :class="{ 'line-through': todo.complete }">
+      {{ todo.title }}
+    </h3>
     <div class="todo-content">
       <span class="todo-text">
         {{ todo.text }}
       </span>
       <div class="todo-actions">
-        <Button class="button" :text="'Success'" />
+        <Button class="button" :text="'Complete'" />
         <Button class="button" :text="'Delete'" />
       </div>
     </div>
@@ -34,6 +36,9 @@ export default {
   cursor: pointer;
   margin-top: 1em;
 }
+.todo-item_completed {
+  background-color: var(--green2);
+}
 .todo-item:nth-child(1) {
   margin-top: 0;
 }
@@ -50,5 +55,8 @@ export default {
 }
 .button:nth-child(even) {
   margin-left: 1em;
+}
+.line-through {
+  text-decoration: line-through;
 }
 </style>

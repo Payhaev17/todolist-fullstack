@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <MainHeader @exitEmit="exit" />
     <main class="home-main">
       <article class="todos-article">
@@ -17,17 +17,17 @@
         <h3 class="todos-info__title">Info</h3>
         <div class="todos-info__item">
           <div class="todos-info__name">
-            <i class="material-icons">format_list_bulleted</i>
+            <i class="tiny material-icons">format_list_bulleted</i>
             Total tasks:
           </div>
-          <span class="todos-info__value">1</span>
+          <span class="todos-info__value">{{ todos.length }}</span>
         </div>
         <div class="todos-info__item">
           <div class="todos-info__name">
             <i class="material-icons">check</i>
             Completed tasks:
           </div>
-          <span class="todos-info__value">41</span>
+          <span class="todos-info__value">{{ completedTasks }}</span>
         </div>
       </aside>
     </main>
@@ -53,6 +53,7 @@ export default {
   },
   mixins: [PaginationMixin],
   data: () => ({
+    loading: true,
     searchText: "",
     todos: [],
   }),
@@ -61,6 +62,8 @@ export default {
   },
   async mounted() {
     this.todos = await this.$store.dispatch("fetchTodos");
+
+    this.loading = false;
   },
   methods: {
     exit() {
@@ -73,6 +76,9 @@ export default {
   },
   computed: {
     dataForPagination() {
+      return this.searchFilter;
+    },
+    searchFilter() {
       return this.todos.filter((todo) => {
         const keys = Object.keys(todo);
 
@@ -82,6 +88,15 @@ export default {
           }
         }
       });
+    },
+    completedTasks() {
+      let completed = 0;
+
+      for (const todo of this.todos) {
+        if (todo.complete) ++completed;
+      }
+
+      return completed;
     },
   },
 };
