@@ -8,8 +8,16 @@
         {{ todo.text }}
       </span>
       <div class="todo-actions">
-        <Button class="button" :text="'Complete'" />
-        <Button class="button" :text="'Delete'" />
+        <Button
+          class="button"
+          :text="'Complete'"
+          @buttonClickEmit="$emit('completeTodoEmit')"
+        />
+        <Button
+          class="button"
+          :text="'Delete'"
+          @buttonClickEmit="$emit('deleteTodoEmit')"
+        />
       </div>
     </div>
   </div>

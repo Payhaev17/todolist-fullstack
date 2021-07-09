@@ -103,6 +103,13 @@ export default {
 </script>
 
 <style scoped>
+.todos {
+  margin-top: 1em;
+}
+.pagination {
+  margin-top: 1em;
+}
+
 .home-main {
   margin-top: 1em;
   display: flex;
@@ -116,8 +123,8 @@ export default {
 }
 .todos-info {
   width: 30%;
+  height: 100%;
   padding: 1em;
-  max-height: 200px;
   box-shadow: 0px 2px 3px var(--grey1);
   border-radius: 3px;
 }
@@ -140,11 +147,5 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: right;
-}
-.todos {
-  margin-top: 1em;
-}
-.pagination {
-  margin-top: 1em;
 }
 </style>
