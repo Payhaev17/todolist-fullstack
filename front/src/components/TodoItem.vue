@@ -11,13 +11,9 @@
         <Button
           class="button"
           :text="'Complete'"
-          @buttonClickEmit="$emit('completeTodoEmit')"
+          @buttonClickEmit="completeTodo"
         />
-        <Button
-          class="button"
-          :text="'Delete'"
-          @buttonClickEmit="$emit('deleteTodoEmit')"
-        />
+        <Button class="button" :text="'Delete'" @buttonClickEmit="deleteTodo" />
       </div>
     </div>
   </div>
@@ -32,6 +28,12 @@ export default {
   },
   components: {
     Button,
+  },
+  methods: {
+    completeTodo() {
+      console.log(this.todo.id);
+    },
+    deleteTodo() {},
   },
 };
 </script>

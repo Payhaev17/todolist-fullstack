@@ -37,12 +37,16 @@
 }
 .main-header__profile {
   margin-right: 1em;
+  padding: 0 1em;
   height: 100%;
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition: background-color 0.3s;
   position: relative;
+}
+.main-header__profile:hover {
+  background: var(--green3);
 }
 .main-header__profile-down {
   min-width: 120px;
