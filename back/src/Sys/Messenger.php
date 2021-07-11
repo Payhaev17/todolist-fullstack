@@ -13,6 +13,6 @@ class Messenger {
   }
 
   private function sendBody(mixed $body) :void {
-    exit(json_encode($body));
+    exit(json_encode($body, JSON_NUMERIC_CHECK));
   }
 }

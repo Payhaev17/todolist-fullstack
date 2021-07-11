@@ -36,10 +36,13 @@ class UserTodos {
       case "DELETE":
         $this->deleteTodo();
         break;
+      case "PATCH":
+        $this->changeTodo();
+        break;
     }
   }
 
-  private function getUserTodos() {
+  private function getUserTodos() :void {
     if (!$this->User->isAuth()) {
       $this->Messenger->sendResponse(401, "Unauthorized");
     }
@@ -49,11 +52,55 @@ class UserTodos {
     );
   }
 
-  private function addTodo() {
+  private function addTodo() :void {
 
   }
 
-  private function deleteTodo() {
+  private function deleteTodo() :void {
 
+  }
+
+  private function changeTodo() :void {
+    if (!$this->User->isAuth()) {
+      $this->Messenger->sendResponse(401, "Unauthorized");
+    }
+
+    $body = $this->RequestBodyReader->getBody();
+    $id = intval((isset($_GET["id"])) ? $_GET["id"] : 0);
+
+    if (!isset($body["key"]) && !isset($body["to"])) {
+      return;
+    }
+
+    switch($body["key"]) {
+      case "title":
+        // $this->changeTodoTitle();
+        break;
+      case "text":
+        // $this->changeTodoText();
+        break;
+      case "complete":
+        $this->changeTodoComplete($id);
+        break;
+    }
+  }
+
+  public function changeTodoComplete(int $id) :void {
+    if ($todo = $this->Connection->fetch("SELECT * FROM todos WHERE id = ?", array($id))) {
+      if ($todo["complete"] || $todo["user_id"] != $this->User->getId()) {
+        return;
+      }
+
+      $this->Connection->query("UPDATE todos SET complete = ? WHERE id = ?", array(1, $id));
+
+      $this->Messenger->sendResponse(200, [
+        "id" => $todo["id"],
+        "title" => $todo["title"],
+        "text" => $todo["text"],
+        "complete" => 1,
+        "del" => 0,
+        "date" => $todo["date"]
+      ]);
+    }
   }
 }

@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     completeTodo() {
-      console.log(this.todo.id);
+      this.$store.dispatch("completeTodo", this.todo.id);
     },
     deleteTodo() {},
   },

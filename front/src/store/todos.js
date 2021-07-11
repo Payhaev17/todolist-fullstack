@@ -11,6 +11,15 @@ export default {
     setTodos(state, todos) {
       state.todos = todos;
     },
+    changeTodoWithId(state, todo) {
+      state.todos = state.todos.map((todoElem) => {
+        if (todoElem.id === todo.id) {
+          return todo;
+        } else {
+          return todoElem;
+        }
+      });
+    },
   },
   actions: {
     async fetchTodos(context) {
@@ -26,19 +35,7 @@ export default {
         }
       );
 
-      const todos = [
-        { id: 1, title: "Title", text: "text task a", complete: 0 },
-        { id: 2, title: "lita", text: "text task a", complete: 1 },
-        { id: 3, title: "Name", text: "text task a", complete: 1 },
-        { id: 4, title: "Mota", text: "text task a", complete: 0 },
-        { id: 5, title: "Gag", text: "text task a", complete: 1 },
-        { id: 6, title: "XXX", text: "text task a", complete: 1 },
-        { id: 7, title: "Face", text: "text task a", complete: 1 },
-        { id: 8, title: "Она была в нем", text: "text task a", complete: 0 },
-        { id: 9, title: "jf", text: "text task a", complete: 0 },
-        { id: 10, title: "Face", text: "text task a", complete: 0 },
-        { id: 11, title: "WWE", text: "text task a", complete: 0 },
-      ];
+      const todos = await res.json();
 
       if (todos instanceof Array) {
         context.commit("setTodos", todos);
@@ -48,5 +45,27 @@ export default {
         return [];
       }
     },
+    async completeTodo(context, id) {
+      const user = context.getters.getUser;
+
+      const res = await fetch(
+        process.env.VUE_APP_API_SERVER + "/api/UserTodos/?id=" + id,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: user.id + ":" + user.hash,
+          },
+          body: JSON.stringify({
+            key: "complete",
+            to: 1,
+          }),
+        }
+      );
+
+      const todo = await res.json();
+
+      context.commit("changeTodoWithId", todo);
+    },
+    async deleteTodo(id) {},
   },
 };
