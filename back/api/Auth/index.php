@@ -2,9 +2,13 @@
 
 # CORS headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE, PATCH");
-header("Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin");
-header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE, PATCH, OPTIONS");
+header("Access-Control-Allow-Headers: *");
+
+# Will Send for preflight request status code 200
+if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+  exit(http_response_code(200));
+}
 
 # Autoload
 require_once $_SERVER["DOCUMENT_ROOT"] ."/vendor/autoload.php";
