@@ -2,6 +2,7 @@
   <div v-if="!loading">
     <MainHeader @exitEmit="exit" />
     <main class="home-main">
+      <CreateTodoButton @createTodoEmit="createTodo" />
       <article class="todos-article">
         <Search @searchEmit="changeSearchText" />
         <Todos
@@ -44,6 +45,7 @@ import MainHeader from "@/components/app/MainHeader.vue";
 import Search from "@/components/Search.vue";
 import Todos from "@/components/Todos.vue";
 import Pagination from "@/components/Pagination.vue";
+import CreateTodoButton from "@/components/CreateTodoButton.vue";
 
 import PaginationMixin from "@/mixins/pagination.mixin.js";
 
@@ -54,6 +56,7 @@ export default {
     Search,
     Todos,
     Pagination,
+    CreateTodoButton,
   },
   mixins: [PaginationMixin],
   data: () => ({
