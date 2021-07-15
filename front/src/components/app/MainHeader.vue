@@ -19,6 +19,7 @@
 .main-header {
   width: 100%;
   height: 3em;
+  margin-top: 1em;
   color: $white1;
   background-color: $green1;
   box-shadow: 0px 2px 3px $grey1;

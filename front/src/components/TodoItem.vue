@@ -53,6 +53,7 @@ export default {
   border-radius: 3px;
   cursor: pointer;
   margin-top: 1em;
+  transition: 0.3s;
 
   &:nth-child(1) {
     margin-top: 0;
@@ -76,7 +77,8 @@ export default {
   }
 }
 .todo-item_completed {
-  background-color: $green2;
+  color: $white1;
+  background-color: $green1;
 }
 .line-through {
   text-decoration: line-through;

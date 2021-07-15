@@ -89,6 +89,9 @@ export default {
         }
       });
     },
+    createTodo() {
+      console.log(1);
+    },
   },
   computed: {
     dataForPagination() {
