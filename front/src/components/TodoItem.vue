@@ -49,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 .todo-item {
   padding: 0.5em;
-  background-color: var(--white2);
+  background-color: $white2;
   border-radius: 3px;
   cursor: pointer;
   margin-top: 1em;
@@ -76,7 +76,7 @@ export default {
   }
 }
 .todo-item_completed {
-  background-color: var(--green2);
+  background-color: $green2;
 }
 .line-through {
   text-decoration: line-through;
