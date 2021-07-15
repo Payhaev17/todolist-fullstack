@@ -2,19 +2,19 @@
   <form class="sign-form" @submit.prevent="signin">
     <input
       class="input"
-      :class="{ 'input-invalid': !validLogin }"
+      :class="{ input_invalid: !validLogin }"
       type="text"
       placeholder="Login"
       v-model.trim="form.login"
     />
     <input
       class="input"
-      :class="{ 'input-invalid': !validPassword }"
+      :class="{ input_invalid: !validPassword }"
       type="password"
       placeholder="Password"
       v-model.trim="form.password"
     />
-    <div class="w100p text-right">
+    <div class="button-right">
       <Button class="button" :disabled="!allValid" :text="'Go'" />
     </div>
   </form>
@@ -60,8 +60,13 @@ export default {
 };
 </script>
 
-<style scoped>
-.button {
-  margin-top: 1em;
+<style lang="scss" scoped>
+.button-right {
+  width: 100%;
+  text-align: right;
+
+  .button {
+    margin-top: 1em;
+  }
 }
 </style>

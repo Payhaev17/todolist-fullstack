@@ -47,30 +47,33 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .pagination {
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-.pagination a {
-  padding: 0.1em 0.5em;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 3px;
-  box-shadow: 0px 2px 5px var(--grey1);
-  cursor: pointer;
-  transition: 0.1s;
-}
-.pagination a:active {
-  box-shadow: none;
-}
-.pagination__curr {
-  padding: 0 1em;
-  color: var(--white1);
-  background-color: var(--green1);
-  font-weight: 900;
+
+  a {
+    padding: 0.1em 0.5em;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px $grey1;
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:active {
+      box-shadow: none;
+    }
+  }
+
+  .pagination__curr {
+    padding: 0 1em;
+    color: $white1;
+    background-color: $green1;
+    font-weight: 900;
+  }
 }
 </style>

@@ -10,19 +10,20 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .button {
   display: inline-block;
   padding: 0.4em 0.8em;
-  box-shadow: 0px 2px 5px var(--grey1);
+  box-shadow: 0px 2px 5px $grey1;
   outline: none;
   border: none;
   border-radius: 4px;
-  background-color: var(--white1);
+  background-color: $white1;
   cursor: pointer;
   transition: 0.1s;
-}
-.button:active {
-  box-shadow: 0px 0px 0px;
+
+  &:active {
+    box-shadow: 0px 0px 0px;
+  }
 }
 </style>

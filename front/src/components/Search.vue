@@ -1,7 +1,7 @@
 <template>
   <section class="search-section">
     <input
-      class="input input-simple"
+      class="input input_simple"
       type="text"
       placeholder="Todo"
       v-model="searchText"
@@ -32,11 +32,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .search-section {
   display: flex;
-}
-.button {
-  margin-left: 1em;
+
+  .button {
+    margin-left: 1em;
+  }
 }
 </style>

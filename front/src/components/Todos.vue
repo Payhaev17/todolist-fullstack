@@ -30,11 +30,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .todos-section {
   height: 380px;
-}
-.todos-empty {
-  text-align: center;
+
+  .todos-empty {
+    text-align: center;
+  }
 }
 </style>

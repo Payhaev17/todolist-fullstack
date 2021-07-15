@@ -115,50 +115,55 @@ export default {
 };
 </script>
 
-<style scoped>
-.todos {
-  margin-top: 1em;
-}
-.pagination {
-  margin-top: 1em;
-}
-
+<style lang="scss" scoped>
 .home-main {
   margin-top: 1em;
   display: flex;
-}
-.todos-article {
-  width: 70%;
-  padding: 1em;
-  margin-right: 1em;
-  box-shadow: 0px 2px 3px var(--grey1);
-  border-radius: 3px;
-}
-.todos-info {
-  width: 30%;
-  height: 100%;
-  padding: 1em;
-  box-shadow: 0px 2px 3px var(--grey1);
-  border-radius: 3px;
-}
-.todos-info__title {
-  text-align: center;
-}
-.todos-info__item {
-  margin-top: 1em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.todos-info__name {
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-.todos-info__value {
-  width: 4em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: right;
+
+  .todos-article {
+    width: 70%;
+    padding: 1em;
+    margin-right: 1em;
+    box-shadow: 0px 2px 3px $grey1;
+    border-radius: 3px;
+
+    .todos {
+      margin-top: 1em;
+    }
+    .pagination {
+      margin-top: 1em;
+    }
+  }
+
+  .todos-info {
+    width: 30%;
+    height: 100%;
+    padding: 1em;
+    box-shadow: 0px 2px 3px $grey1;
+    border-radius: 3px;
+
+    .todos-info__title {
+      text-align: center;
+    }
+
+    .todos-info__item {
+      margin-top: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .todos-info__name {
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+      .todos-info__value {
+        width: 4em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+      }
+    }
+  }
 }
 </style>
