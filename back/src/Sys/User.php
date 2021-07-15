@@ -17,7 +17,7 @@ class User {
     $data = (isset($headers["Authorization"])) ? explode(":", $headers["Authorization"]) : [];
 
     if (count($data) >= 2) {
-      $userId = $data[0];
+      $userId = intval($data[0]);
       $sessionHash = $data[1];
 
       if ($user = $this->Connection->fetch("SELECT * FROM users WHERE id = ?", array($userId))) {

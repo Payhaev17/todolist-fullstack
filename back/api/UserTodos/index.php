@@ -2,9 +2,7 @@
 
 # CORS headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-header("Access-Control-Allow-Methods: GET, POST, DELETE, PATCH");
-header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE, PATCH");
 
 # Autoload
 require_once $_SERVER["DOCUMENT_ROOT"] ."/vendor/autoload.php";
@@ -17,7 +15,7 @@ $ErrorsHandler->displayAllErrors();
 $EnvReader = new App\Sys\EnvReader();
 $envConfig = $EnvReader->getEnv();
 
-# DB connection
+# connection of DB
 $Connection = new App\Sys\Connection($envConfig["DB_HOST"], $envConfig["DB_NAME"], $envConfig["DB_USERNAME"], $envConfig["DB_PASSWORD"]);
 
 $UserTodos = new App\UserTodos(
@@ -27,4 +25,5 @@ $UserTodos = new App\UserTodos(
   new App\Sys\Messenger(),
   new App\Sys\User($Connection)
 );
+
 $UserTodos->handleRequest();

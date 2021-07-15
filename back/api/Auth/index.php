@@ -2,9 +2,9 @@
 
 # CORS headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE, PATCH");
+header("Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin");
 header("Access-Control-Allow-Credentials: true");
-header("Content-Type: application/json");
 
 # Autoload
 require_once $_SERVER["DOCUMENT_ROOT"] ."/vendor/autoload.php";

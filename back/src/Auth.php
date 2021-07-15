@@ -44,16 +44,16 @@ class Auth {
 
     # Login ocuppied
     if ($loginIsOccupy) {
-      $this->Messenger->sendResponse(401, [
-        "error" => "Логин занят!"
-      ]);
+      http_response_code(401);
+      
+      $this->Messenger->sendResponse(["error" => "Логин занят!"]);
     }
 
     # Invalid data
     if (!($this->Validator->loginValid($login) && $this->Validator->passwordValid($password))) {
-      $this->Messenger->sendResponse(401, [
-        "error" => "Введите корректные данные!"
-      ]);
+      http_response_code(401);
+
+      $this->Messenger->sendResponse(["error" => "Введите корректные данные!"]);
     }
 
     # Signup
@@ -65,7 +65,9 @@ class Auth {
     
     $userId = $this->Connection->lastId();
 
-    $this->Messenger->sendResponse(201, [
+    http_response_code(200);
+
+    $this->Messenger->sendResponse([
       "auth" => true,
       "id" => $userId,
       "hash" => $sessionHash
@@ -81,7 +83,9 @@ class Auth {
     $user = $this->Connection->fetch("SELECT id, password FROM users WHERE login = ?", array($login));
 
     if (!$user || !password_verify($password, $user["password"])) {
-      $this->Messenger->sendResponse(401, [
+      http_response_code(401);
+
+      $this->Messenger->sendResponse([
         "error" => "Логин или пароль введены не верно!"
       ]);
     }
@@ -92,7 +96,9 @@ class Auth {
       $sessionHash, $user["id"]
     ));
 
-    $this->Messenger->sendResponse(200, [
+    http_response_code(200);
+
+    $this->Messenger->sendResponse([
       "auth" => true,
       "id" => $user["id"],
       "hash" => $sessionHash

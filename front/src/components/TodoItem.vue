@@ -9,6 +9,7 @@
       </span>
       <div class="todo-actions">
         <Button
+          v-if="!todo.complete"
           class="button"
           :text="'Complete'"
           @buttonClickEmit="completeTodo"
@@ -30,10 +31,17 @@ export default {
     Button,
   },
   methods: {
-    completeTodo() {
-      this.$store.dispatch("completeTodo", this.todo.id);
+    async completeTodo() {
+      const todo = await this.$store.dispatch("completeTodo", this.todo.id);
+
+      this.$emit("changeTodoWithIdEmit", todo);
     },
-    deleteTodo() {},
+    async deleteTodo() {
+      const deletedTodo = await this.$store.dispatch(
+        "deleteTodo",
+        this.todo.id
+      );
+    },
   },
 };
 </script>

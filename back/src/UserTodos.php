@@ -26,9 +26,14 @@ class UserTodos {
   }
 
   public function handleRequest() :void {
+    if (!$this->User->isAuth()) {
+      http_response_code(401);
+      $this->Messenger->sendResponse(["error" => "Unauthorized"]);
+    }
+    
     switch($_SERVER["REQUEST_METHOD"]) {
       case "GET":
-        $this->getUserTodos();
+        $this->sendUserTodos();
         break;
       case "POST":
         $this->addTodo();
@@ -42,31 +47,35 @@ class UserTodos {
     }
   }
 
-  private function getUserTodos() :void {
-    if (!$this->User->isAuth()) {
-      $this->Messenger->sendResponse(401, "Unauthorized");
-    }
-  
-    $this->Messenger->sendResponse(200, 
+  private function sendUserTodos() :void {
+    http_response_code(200);
+    $this->Messenger->sendResponse(
       $this->Connection->fetchAll("SELECT * FROM todos WHERE user_id = ?", array($this->User->getId()))
     );
   }
 
   private function addTodo() :void {
-
+    //
   }
 
   private function deleteTodo() :void {
+    $id = intval(isset($_GET["id"]) ? $_GET["id"] : 0);
 
+    if ($todo = $this->Connection->fetch("SELECT * FROM todos WHERE id = ?", array($id))) {
+      if ($todo["del"] || $todo["user_id"] != $this->User->getId()) {
+        return;
+      }
+
+      $this->Connection->query("UPDATE todo SET del = ? WHERE id = ?", array(1, $this->User->getId()));
+
+      http_response_code(200);
+      $this->Messenger->sendResponse(["id" => $todo["id"]]);
+    }
   }
 
   private function changeTodo() :void {
-    if (!$this->User->isAuth()) {
-      $this->Messenger->sendResponse(401, "Unauthorized");
-    }
-
     $body = $this->RequestBodyReader->getBody();
-    $id = intval((isset($_GET["id"])) ? $_GET["id"] : 0);
+    $id = intval(isset($_GET["id"]) ? $_GET["id"] : 0);
 
     if (!isset($body["key"]) && !isset($body["to"])) {
       return;
@@ -93,7 +102,9 @@ class UserTodos {
 
       $this->Connection->query("UPDATE todos SET complete = ? WHERE id = ?", array(1, $id));
 
-      $this->Messenger->sendResponse(200, [
+      http_response_code(200);  
+
+      $this->Messenger->sendResponse([
         "id" => $todo["id"],
         "title" => $todo["title"],
         "text" => $todo["text"],

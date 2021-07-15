@@ -4,7 +4,11 @@
     <main class="home-main">
       <article class="todos-article">
         <Search @searchEmit="changeSearchText" />
-        <Todos class="todos" :todos="paginatedData" />
+        <Todos
+          class="todos"
+          :todos="paginatedData"
+          @changeTodoWithIdEmit="changeTodoWithId"
+        />
         <Pagination
           class="pagination"
           :currPage="page"
@@ -72,6 +76,15 @@ export default {
     },
     changeSearchText(text) {
       this.searchText = text;
+    },
+    changeTodoWithId(todo) {
+      this.todos = this.todos.map((todoElem) => {
+        if (todoElem.id === todo.id) {
+          return todo;
+        } else {
+          return todoElem;
+        }
+      });
     },
   },
   computed: {

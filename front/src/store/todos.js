@@ -65,7 +65,27 @@ export default {
       const todo = await res.json();
 
       context.commit("changeTodoWithId", todo);
+
+      return todo;
     },
-    async deleteTodo(id) {},
+    async deleteTodo(id) {
+      const user = context.getters.getUser;
+
+      const res = await fetch(
+        process.env.VUE_APP_API_SERVER + "/api/UserTodos/?id=" + id,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: user.id + ":" + user.hash,
+          },
+        }
+      );
+
+      const deletedTodo = await res.json();
+
+      context.commit("deleteTodo", deletedTodo);
+
+      return deletedTodo;
+    },
   },
 };
