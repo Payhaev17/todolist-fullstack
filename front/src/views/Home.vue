@@ -2,7 +2,8 @@
   <div v-if="!loading">
     <MainHeader @exitEmit="exit" />
     <main class="home-main">
-      <CreateTodoButton @createTodoEmit="createTodo" />
+      <CreateTodoForm :active="createTodoFormActive" />
+      <CreateTodoButton @createTodoEmit="createTodoOpen" />
       <article class="todos-article">
         <Search @searchEmit="changeSearchText" />
         <Todos
@@ -46,6 +47,7 @@ import Search from "@/components/Search.vue";
 import Todos from "@/components/Todos.vue";
 import Pagination from "@/components/Pagination.vue";
 import CreateTodoButton from "@/components/CreateTodoButton.vue";
+import CreateTodoForm from "@/components/CreateTodoForm.vue";
 
 import PaginationMixin from "@/mixins/pagination.mixin.js";
 
@@ -57,9 +59,11 @@ export default {
     Todos,
     Pagination,
     CreateTodoButton,
+    CreateTodoForm,
   },
   mixins: [PaginationMixin],
   data: () => ({
+    createTodoFormActive: false,
     loading: true,
     searchText: "",
     todos: [],
@@ -89,8 +93,8 @@ export default {
         }
       });
     },
-    createTodo() {
-      console.log(1);
+    createTodoOpen() {
+      this.createTodoFormActive = !this.createTodoFormActive;
     },
   },
   computed: {
