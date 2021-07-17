@@ -4,12 +4,12 @@
       :active="popup.active"
       :title="popup.title"
       :text="popup.text"
-      @closePopupEmit="closePopup"
+      @closePopup="closePopup"
     />
     <article class="sign-article">
       <section class="sign-section">
         <h3 class="sign-article__title">SignUp</h3>
-        <SignUpForm @signupEmit="signup" />
+        <SignUpForm @signup="signup" />
       </section>
       <section class="redirect-section">
         <router-link to="/signin">SignIn</router-link>

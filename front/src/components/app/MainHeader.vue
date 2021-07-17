@@ -6,7 +6,7 @@
       <span class="main-header__name">Mota</span>
       <div class="main-header__profile-down">
         <ul>
-          <li @click="$emit('exitEmit')">
+          <li @click="$emit('logout')">
             <i class="tiny material-icons">exit_to_app</i> <span>Exit</span>
           </li>
         </ul>

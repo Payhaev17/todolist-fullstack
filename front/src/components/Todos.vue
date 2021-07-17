@@ -5,7 +5,7 @@
         v-for="todo in todos"
         :key="todo.id"
         :todo="todo"
-        @changeTodoWithIdEmit="changeTodoWithId"
+        @changeTodoWithId="changeTodoWithId"
       />
     </div>
     <h4 class="todos-empty" v-else>Пусто</h4>
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     changeTodoWithId(todo) {
-      this.$emit("changeTodoWithIdEmit", todo);
+      this.$emit("changeTodoWithId", todo);
     },
   },
 };

@@ -9,7 +9,7 @@
     <Button
       class="button"
       :text="'Search'"
-      @click="$emit('searchEmit', searchText)"
+      @click="$emit('search', searchText)"
     />
   </section>
 </template>
@@ -26,7 +26,7 @@ export default {
   }),
   watch: {
     searchText() {
-      this.$emit("searchEmit", this.searchText);
+      this.$emit("search", this.searchText);
     },
   },
 };

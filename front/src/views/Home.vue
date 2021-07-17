@@ -1,22 +1,25 @@
 <template>
   <div v-if="!loading">
-    <MainHeader @exitEmit="exit" />
+    <MainHeader @logout="logout" />
     <main class="home-main">
-      <CreateTodoForm :active="createTodoFormActive" />
-      <CreateTodoButton @createTodoEmit="createTodoOpen" />
+      <CreateTodoForm
+        :active="createTodoForm.active"
+        @createTodoFormState="createTodoFormState"
+      />
+      <CreateTodoButton @createTodoFormState="createTodoFormState" />
       <article class="todos-article">
-        <Search @searchEmit="changeSearchText" />
+        <Search @search="changeSearchText" />
         <Todos
           class="todos"
           :todos="paginatedData"
-          @changeTodoWithIdEmit="changeTodoWithId"
+          @changeTodoWithId="changeTodoWithId"
         />
         <Pagination
           class="pagination"
           :currPage="page"
           :maxPage="maxPage"
           :pages="paginationPages"
-          @changePageEmit="changePage"
+          @changePage="changePage"
         />
       </article>
       <aside class="todos-info">
@@ -63,7 +66,9 @@ export default {
   },
   mixins: [PaginationMixin],
   data: () => ({
-    createTodoFormActive: false,
+    createTodoForm: {
+      active: false,
+    },
     loading: true,
     searchText: "",
     todos: [],
@@ -77,8 +82,8 @@ export default {
     this.loading = false;
   },
   methods: {
-    exit() {
-      this.$store.dispatch("exit");
+    logout() {
+      this.$store.dispatch("logout");
       this.$router.push("/signin");
     },
     changeSearchText(text) {
@@ -93,8 +98,8 @@ export default {
         }
       });
     },
-    createTodoOpen() {
-      this.createTodoFormActive = !this.createTodoFormActive;
+    createTodoFormState() {
+      this.createTodoForm.active = !this.createTodoForm.active;
     },
   },
   computed: {

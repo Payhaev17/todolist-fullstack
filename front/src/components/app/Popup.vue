@@ -10,7 +10,7 @@
       <Button
         class="popup__button"
         :text="'Закрыть'"
-        @buttonClickEmit="$emit('closePopupEmit')"
+        @buttonClick="$emit('closePopup')"
       />
     </div>
   </div>

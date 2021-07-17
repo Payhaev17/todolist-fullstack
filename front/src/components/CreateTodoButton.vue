@@ -1,5 +1,5 @@
 <template>
-  <button class="create-todo" @click="$emit('createTodoEmit')">
+  <button class="create-todo" @click="$emit('createTodoFormState')">
     <i class="material-icons">add</i>
   </button>
 </template>

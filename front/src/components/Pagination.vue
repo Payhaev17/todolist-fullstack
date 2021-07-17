@@ -2,7 +2,7 @@
   <section class="pagination">
     <router-link
       :to="'/?page=' + prevPage"
-      @click="$emit('changePageEmit', prevPage)"
+      @click="$emit('changePage', prevPage)"
     >
       <i class="small material-icons">chevron_left</i>
     </router-link>
@@ -11,13 +11,13 @@
       :key="page"
       :class="{ pagination__curr: currPage === page }"
       :to="'/?page=' + page"
-      @click="$emit('changePageEmit', page)"
+      @click="$emit('changePage', page)"
     >
       {{ page }}
     </router-link>
     <router-link
       :to="'/?page=' + nextPage"
-      @click="$emit('changePageEmit', nextPage)"
+      @click="$emit('changePage', nextPage)"
     >
       <i class="small material-icons">chevron_right</i>
     </router-link>

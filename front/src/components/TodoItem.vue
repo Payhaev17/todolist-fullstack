@@ -12,9 +12,9 @@
           v-if="!todo.complete"
           class="button"
           :text="'Complete'"
-          @buttonClickEmit="completeTodo"
+          @buttonClick="completeTodo"
         />
-        <Button class="button" :text="'Delete'" @buttonClickEmit="deleteTodo" />
+        <Button class="button" :text="'Delete'" @buttonClick="deleteTodo" />
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@ export default {
     async completeTodo() {
       const todo = await this.$store.dispatch("completeTodo", this.todo.id);
 
-      this.$emit("changeTodoWithIdEmit", todo);
+      this.$emit("changeTodoWithId", todo);
     },
     async deleteTodo() {
       const deletedTodo = await this.$store.dispatch(

@@ -20,7 +20,7 @@ export default {
     },
   },
   actions: {
-    exit(context) {
+    logout(context) {
       context.commit("setUser", {
         auth: false,
         id: "",

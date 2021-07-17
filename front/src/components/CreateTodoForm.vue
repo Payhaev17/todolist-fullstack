@@ -2,6 +2,7 @@
   <form
     class="create-todo"
     :class="{ 'create-todo_active': active }"
+    @click="createTodoFormState"
     @submit.prevent
   >
     <div
@@ -47,6 +48,13 @@ export default {
       text: "",
     },
   }),
+  methods: {
+    createTodoFormState(e) {
+      // Count a click only on the black zone
+      if (e.target.classList.contains("create-todo"))
+        this.$emit("createTodoFormState");
+    },
+  },
   computed: {
     titleValid() {
       return this.todoTitleValid(this.form.title);
@@ -75,6 +83,7 @@ export default {
   visibility: hidden;
 
   .create-todo-inner {
+    min-width: 25vw;
     padding: 2em;
     background-color: $white1;
     border-radius: 5px;

@@ -47,7 +47,7 @@ export default {
   methods: {
     signup() {
       if (this.allValid) {
-        this.$emit("signupEmit", { ...this.form });
+        this.$emit("signup", { ...this.form });
 
         this.form.login = "";
         this.form.password = "";
