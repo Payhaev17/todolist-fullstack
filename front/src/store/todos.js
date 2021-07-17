@@ -23,6 +23,11 @@ export default {
         }
       });
     },
+    deleteTodo(state, deletedTodo) {
+      state.todos = state.todos.filter((todo) => {
+        if (todo.id !== deletedTodo.id) return todo;
+      });
+    },
   },
   actions: {
     async fetchTodos(context) {
@@ -86,7 +91,7 @@ export default {
 
       context.commit("changeTodoWithId", todo);
     },
-    async deleteTodo(id) {
+    async deleteTodo(context, id) {
       const user = context.getters.getUser;
 
       const res = await fetch(

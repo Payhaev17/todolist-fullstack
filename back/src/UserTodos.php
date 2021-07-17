@@ -49,8 +49,9 @@ class UserTodos {
 
   private function sendUserTodos() :void {
     http_response_code(200);
+
     $this->Messenger->sendResponse(
-      $this->Connection->fetchAll("SELECT * FROM todos WHERE user_id = ?", array($this->User->getId()))
+      $this->Connection->fetchAll("SELECT * FROM todos WHERE del = 0 AND user_id = ?", array($this->User->getId()))
     );
   }
 
@@ -91,9 +92,10 @@ class UserTodos {
         return;
       }
 
-      $this->Connection->query("UPDATE todo SET del = ? WHERE id = ?", array(1, $this->User->getId()));
+      $this->Connection->query("UPDATE todos SET del = ? WHERE id = ?", array(1, $this->User->getId()));
 
       http_response_code(200);
+
       $this->Messenger->sendResponse(["id" => $todo["id"]]);
     }
   }
