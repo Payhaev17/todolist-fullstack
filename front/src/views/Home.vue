@@ -5,16 +5,11 @@
       <CreateTodoForm
         :active="createTodoForm.active"
         @openCreateTodoForm="openCreateTodoForm"
-        @createTodo="createTodo"
       />
       <CreateTodoButton @openCreateTodoForm="openCreateTodoForm" />
       <article class="todos-article">
         <Search @search="changeSearchText" />
-        <Todos
-          class="todos"
-          :todos="paginatedData"
-          @changeTodoWithId="changeTodoWithId"
-        />
+        <Todos class="todos" :todos="paginatedData" />
         <Pagination
           class="pagination"
           :currPage="page"
@@ -37,7 +32,7 @@
             <i class="material-icons">check</i>
             Completed tasks:
           </div>
-          <span class="todos-info__value">{{ completedTasks }}</span>
+          <span class="todos-info__value">{{ completedTodos }}</span>
         </div>
       </aside>
     </main>
@@ -72,13 +67,12 @@ export default {
     },
     loading: true,
     searchText: "",
-    todos: [],
   }),
   created() {
     this.page = Number(this.$route.query.page) || 1;
   },
   async mounted() {
-    this.todos = await this.$store.dispatch("fetchTodos");
+    await this.$store.dispatch("fetchTodos");
 
     this.loading = false;
   },
@@ -90,22 +84,8 @@ export default {
     changeSearchText(text) {
       this.searchText = text;
     },
-    changeTodoWithId(todo) {
-      this.todos = this.todos.map((todoElem) => {
-        if (todoElem.id === todo.id) {
-          return todo;
-        } else {
-          return todoElem;
-        }
-      });
-    },
     openCreateTodoForm() {
       this.createTodoForm.active = !this.createTodoForm.active;
-    },
-    async createTodo(form) {
-      const todo = await this.$store.dispatch("createTodo", form);
-
-      this.todos.unshift(todo);
     },
   },
   computed: {
@@ -123,7 +103,10 @@ export default {
         }
       });
     },
-    completedTasks() {
+    todos() {
+      return this.$store.getters.getTodos;
+    },
+    completedTodos() {
       let completed = 0;
 
       for (const todo of this.todos) {

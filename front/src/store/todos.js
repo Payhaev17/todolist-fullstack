@@ -11,8 +11,8 @@ export default {
     setTodos(state, todos) {
       state.todos = todos;
     },
-    unshiftTodo(state, todo) {
-      state.todos.unshift(todo);
+    addTodo(state, todo) {
+      state.todos.push(todo);
     },
     changeTodoWithId(state, todo) {
       state.todos = state.todos.map((todoElem) => {
@@ -42,10 +42,6 @@ export default {
 
       if (todos instanceof Array) {
         context.commit("setTodos", todos);
-
-        return todos;
-      } else {
-        return [];
       }
     },
     async createTodo(context, form) {
@@ -67,9 +63,7 @@ export default {
 
       const todo = await res.json();
 
-      context.commit("unshiftTodo", todo);
-
-      return todo;
+      context.commit("addTodo", todo);
     },
     async completeTodo(context, id) {
       const user = context.getters.getUser;
@@ -91,8 +85,6 @@ export default {
       const todo = await res.json();
 
       context.commit("changeTodoWithId", todo);
-
-      return todo;
     },
     async deleteTodo(id) {
       const user = context.getters.getUser;
@@ -110,8 +102,6 @@ export default {
       const deletedTodo = await res.json();
 
       context.commit("deleteTodo", deletedTodo);
-
-      return deletedTodo;
     },
   },
 };

@@ -33,8 +33,6 @@ export default {
   methods: {
     async completeTodo() {
       const todo = await this.$store.dispatch("completeTodo", this.todo.id);
-
-      this.$emit("changeTodoWithId", todo);
     },
     async deleteTodo() {
       const deletedTodo = await this.$store.dispatch(

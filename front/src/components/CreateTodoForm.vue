@@ -2,8 +2,8 @@
   <form
     class="create-todo"
     :class="{ 'create-todo_active': active }"
-    @click="createTodoFormState"
-    @submit.prevent="submit"
+    @click="openCreateTodoForm"
+    @submit.prevent="createTodo"
   >
     <div
       class="create-todo-inner"
@@ -49,16 +49,15 @@ export default {
     },
   }),
   methods: {
-    createTodoFormState(e) {
+    openCreateTodoForm(e) {
       // Count a click only on the black zone
       if (e.target.classList.contains("create-todo"))
-        this.$emit("createTodoFormState");
+        this.$emit("openCreateTodoForm");
     },
-    submit() {
-      this.$emit("createTodo", { ...this.form });
+    createTodo() {
+      this.$store.dispatch("createTodo", { ...this.form });
 
-      this.form.title = "";
-      this.form.text = "";
+      this.form.title = this.form.text = "";
     },
   },
   computed: {
