@@ -36,7 +36,7 @@ class UserTodos {
         $this->sendUserTodos();
         break;
       case "POST":
-        $this->addTodo();
+        $this->createTodo();
         break;
       case "DELETE":
         $this->deleteTodo();
@@ -54,8 +54,33 @@ class UserTodos {
     );
   }
 
-  private function addTodo() :void {
-    //
+  private function createTodo() :void {
+    $body = $this->RequestBodyReader->getBody();
+
+    $title = (isset($body["title"])) ? trim(htmlspecialchars($body["title"])) : "";
+    $text = (isset($body["text"])) ? trim(htmlspecialchars($body["text"])) : "";
+
+    if (!$this->Validator->todoTitleValid($title) && !$this->Validator->todoTextValid($text)) {
+      return;
+    }
+
+    $this->Connection->query("INSERT INTO todos (title, text, complete, del, date, user_id) VALUES (?, ?, ?, ?, ?, ?)", array(
+      $title, $text, 0, 0, time(), $this->User->getId()
+    ));
+
+    $todoId = $this->Connection->lastId();
+
+    http_response_code(201);
+
+    $this->Messenger->sendResponse([
+      "id" => $todoId,
+      "title" => $title,
+      "text" => $text, 
+      "complete" => 0,
+      "del" => 0,
+      "date" => time(),
+      "user_id" => $this->User->getId()
+    ]);
   }
 
   private function deleteTodo() :void {

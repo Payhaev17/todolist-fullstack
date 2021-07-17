@@ -4,9 +4,10 @@
     <main class="home-main">
       <CreateTodoForm
         :active="createTodoForm.active"
-        @createTodoFormState="createTodoFormState"
+        @openCreateTodoForm="openCreateTodoForm"
+        @createTodo="createTodo"
       />
-      <CreateTodoButton @createTodoFormState="createTodoFormState" />
+      <CreateTodoButton @openCreateTodoForm="openCreateTodoForm" />
       <article class="todos-article">
         <Search @search="changeSearchText" />
         <Todos
@@ -82,8 +83,8 @@ export default {
     this.loading = false;
   },
   methods: {
-    logout() {
-      this.$store.dispatch("logout");
+    async logout() {
+      await this.$store.dispatch("logout");
       this.$router.push("/signin");
     },
     changeSearchText(text) {
@@ -98,8 +99,13 @@ export default {
         }
       });
     },
-    createTodoFormState() {
+    openCreateTodoForm() {
       this.createTodoForm.active = !this.createTodoForm.active;
+    },
+    async createTodo(form) {
+      const todo = await this.$store.dispatch("createTodo", form);
+
+      this.todos.unshift(todo);
     },
   },
   computed: {
@@ -111,9 +117,9 @@ export default {
         const keys = Object.keys(todo);
 
         for (const key of keys) {
-          if (typeof todo[key] === "string") {
-            if (todo[key].includes(this.searchText)) return true;
-          }
+          const str = todo[key].toString();
+
+          if (str.includes(this.searchText)) return true;
         }
       });
     },

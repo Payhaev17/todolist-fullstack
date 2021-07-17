@@ -11,6 +11,9 @@ export default {
     setTodos(state, todos) {
       state.todos = todos;
     },
+    unshiftTodo(state, todo) {
+      state.todos.unshift(todo);
+    },
     changeTodoWithId(state, todo) {
       state.todos = state.todos.map((todoElem) => {
         if (todoElem.id === todo.id) {
@@ -44,6 +47,29 @@ export default {
       } else {
         return [];
       }
+    },
+    async createTodo(context, form) {
+      const user = context.getters.getUser;
+
+      const res = await fetch(
+        process.env.VUE_APP_API_SERVER + "/api/UserTodos/",
+        {
+          method: "POST",
+          headers: {
+            Authorization: user.id + ":" + user.hash,
+          },
+          body: JSON.stringify({
+            title: form.title,
+            text: form.text,
+          }),
+        }
+      );
+
+      const todo = await res.json();
+
+      context.commit("unshiftTodo", todo);
+
+      return todo;
     },
     async completeTodo(context, id) {
       const user = context.getters.getUser;

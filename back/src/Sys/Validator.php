@@ -14,4 +14,18 @@ class Validator {
 
     return true;
   }
+
+  public function todoTitleValid(string $title) :bool {
+    $len = strlen($title);
+    if ($len < 2 || $len > 40) return false;
+
+    return true;
+  }
+
+  public function todoTextValid(string $text) :bool {
+    $len = strlen($text);
+    if ($len < 2 || $len > 255) return false;
+
+    return true;
+  }
 }
