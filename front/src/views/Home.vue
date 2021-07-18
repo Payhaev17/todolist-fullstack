@@ -1,23 +1,11 @@
 <template>
   <div v-if="!loading">
-    <MainHeader @logout="logout" />
+    <MainHeader @logout="logout" @openCreateTodoForm="openCreateTodoForm" />
     <main class="home-main">
       <CreateTodoForm
         :active="createTodoForm.active"
         @openCreateTodoForm="openCreateTodoForm"
       />
-      <CreateTodoButton @openCreateTodoForm="openCreateTodoForm" />
-      <article class="todos-article">
-        <Search @search="changeSearchText" />
-        <Todos class="todos" :todos="paginatedData" />
-        <Pagination
-          class="pagination"
-          :currPage="page"
-          :maxPage="maxPage"
-          :pages="paginationPages"
-          @changePage="changePage"
-        />
-      </article>
       <aside class="todos-info">
         <h3 class="todos-info__title">Info</h3>
         <div class="todos-info__item">
@@ -35,6 +23,17 @@
           <span class="todos-info__value">{{ completedTodos }}</span>
         </div>
       </aside>
+      <article class="todos-article">
+        <Search @search="changeSearchText" />
+        <Todos class="todos" :todos="paginatedData" />
+        <Pagination
+          class="pagination"
+          :currPage="page"
+          :maxPage="maxPage"
+          :pages="paginationPages"
+          @changePage="changePage"
+        />
+      </article>
     </main>
   </div>
 </template>
@@ -45,7 +44,6 @@ import MainHeader from "@/components/app/MainHeader.vue";
 import Search from "@/components/Search.vue";
 import Todos from "@/components/Todos.vue";
 import Pagination from "@/components/Pagination.vue";
-import CreateTodoButton from "@/components/CreateTodoButton.vue";
 import CreateTodoForm from "@/components/CreateTodoForm.vue";
 
 import PaginationMixin from "@/mixins/pagination.mixin.js";
@@ -57,7 +55,6 @@ export default {
     Search,
     Todos,
     Pagination,
-    CreateTodoButton,
     CreateTodoForm,
   },
   mixins: [PaginationMixin],
@@ -125,9 +122,8 @@ export default {
   display: flex;
 
   .todos-article {
-    width: 70%;
+    flex: 2;
     padding: 1em;
-    margin-right: 1em;
     box-shadow: 0px 2px 3px $grey1;
     border-radius: 3px;
 
@@ -140,9 +136,10 @@ export default {
   }
 
   .todos-info {
-    width: 30%;
+    flex: 1;
     height: 100%;
     padding: 1em;
+    margin-right: 1em;
     box-shadow: 0px 2px 3px $grey1;
     border-radius: 3px;
 
@@ -167,6 +164,16 @@ export default {
         text-overflow: ellipsis;
         text-align: right;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home-main {
+    flex-direction: column;
+
+    .todos-info {
+      margin-right: 0;
     }
   }
 }

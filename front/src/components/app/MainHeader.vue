@@ -9,6 +9,9 @@
           <li @click="$emit('logout')">
             <i class="tiny material-icons">exit_to_app</i> <span>Exit</span>
           </li>
+          <li @click="$emit('openCreateTodoForm')">
+            <i class="tiny material-icons">add</i> <span>Create todo</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -19,14 +22,12 @@
 .main-header {
   width: 100%;
   height: 3em;
-  margin-top: 1em;
   color: $white1;
   background-color: $green1;
   box-shadow: 0px 2px 3px $grey1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 3px;
 
   .main-header__logo {
     margin-left: 1em;
@@ -53,7 +54,6 @@
     }
 
     .main-header__profile-down {
-      min-width: 120px;
       background: $white1;
       color: $black1;
       box-shadow: 0px 2px 4px $grey1;
@@ -62,6 +62,10 @@
       right: 0;
       transform: scale(0);
       transition: transform 0.3s;
+
+      li {
+        white-space: nowrap;
+      }
     }
 
     &:hover .main-header__profile-down {
